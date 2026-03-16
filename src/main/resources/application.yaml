@@ -1,0 +1,57 @@
+spring:
+  application:
+    name: db-perf-test
+  datasource:
+    url: jdbc:postgresql://localhost:5432/postgres
+    username: admin
+    password: admin123
+    hikari:
+      maximum-pool-size: 20
+      minimum-idle: 10
+      connection-timeout: 30000
+      idle-timeout: 600000
+      max-lifetime: 1800000
+  threads:
+    virtual:
+      enabled: false
+
+logging:
+  level:
+    # Logs SQL statement execution and parameter binding
+    org.springframework.jdbc.core: DEBUG
+    # Logs connection pool activity (acquisition, release, timeouts)
+    com.zaxxer.hikari: DEBUG
+    # Logs the Observation/Metric lifecycle
+    io.micrometer.observation: DEBUG
+
+management:
+  endpoints:
+    web:
+      exposure:
+        include: health, prometheus, metrics
+  metrics:
+    tags:
+      application: spring-jdbc-perf
+    tracing:
+      sampling:
+        probability: 1.0 # Teszt alatt mérjünk mindent
+      observations:
+        key-values:
+          application: spring-jdbc-perf
+    data:
+      repository:
+        autotime:
+          enabled: true
+    distribution:
+      # Bekapcsolja a histogramokat a Spring Data repository hívásokhoz
+      percentiles-histogram:
+        "spring.data": true
+        "spring.data.repository.invocations": true
+
+      # Itt adhatod meg a fix percentiliseket (opcionális, a histogramból a Grafana is ki tudja számolni)
+      percentiles:
+        spring.data.repository.invocations: 0.5, 0.95, 0.99
+
+      # SLO (Service Level Objectives) - fix "vödrök" definiálása a pontosabb méréshez
+      slo:
+        spring.data.repository.invocations: 10ms, 50ms, 100ms, 500ms, 1s

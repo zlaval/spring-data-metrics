@@ -1,0 +1,21 @@
+### Set global variables
+@host = http://localhost:8080/api/users
+@userId = 1
+
+### Get user by ID
+GET {{host}}/{{userId}}
+Accept: application/json
+
+### Create a new user
+POST {{host}}
+Content-Type: application/json
+
+{
+  "name": "John Doe",
+  "birthDate": "1990-05-15",
+  "description": "Software Engineer and JDBC expert"
+}
+
+### Check Actuator metrics for the calls made above
+GET {{host}}/actuator/metrics/spring.data.repository.invocations
+Accept: application/json

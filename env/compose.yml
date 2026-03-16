@@ -1,0 +1,64 @@
+services:
+  postgres-db:
+    image: postgres:16-alpine
+    container_name: postgres
+    restart: always
+    networks:
+      - perf-network
+    environment:
+      - POSTGRES_USER=admin
+      - POSTGRES_PASSWORD=admin123
+      - POSTGRES_DB=postgres
+    ports:
+      - "5432:5432"
+    volumes:
+      - postgres_data:/var/lib/postgresql/data
+    # - .conf/postgres.conf:/etc/postgresql/postgresql.conf:ro
+    deploy:
+      resources:
+        limits:
+          cpus: '2.0'      # Fix 2 magos CPU limit
+          memory: 2048M    # Szigorú 2GB RAM limit
+
+    #command: ["postgres", "-c", "config_file=/etc/postgresql/postgresql.conf"]
+
+  postgres-exporter:
+    image: prometheuscommunity/postgres-exporter
+    container_name: postgres_exporter
+    networks:
+      - perf-network
+    environment:
+      DATA_SOURCE_NAME: "postgresql://admin:admin123@postgres-db:5432/postgres?sslmode=disable"
+    ports:
+      - "9187:9187"
+    depends_on:
+      - postgres-db
+
+  prometheus:
+    image: prom/prometheus
+    container_name: prometheus
+    networks:
+      - perf-network
+    volumes:
+      - ./conf/prometheus.yml:/etc/prometheus/prometheus.yml
+    ports:
+      - "9090:9090"
+
+  grafana:
+    image: grafana/grafana
+    container_name: grafana
+    networks:
+      - perf-network
+    ports:
+      - "3000:3000"
+    environment:
+      - GF_SECURITY_ADMIN_PASSWORD=admin123
+    depends_on:
+      - prometheus
+
+networks:
+  perf-network:
+    driver: bridge
+
+volumes:
+  postgres_data:

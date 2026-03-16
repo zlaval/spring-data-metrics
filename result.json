@@ -1,0 +1,147 @@
+{
+    "metrics": {
+        "http_req_failed": {
+            "passes": 2,
+            "fails": 941194,
+            "thresholds": {
+                "rate<0.01": false
+            },
+            "value": 0.0000021249559071649264
+        },
+        "http_req_waiting": {
+            "med": 515.4858999999999,
+            "max": 1036.2185,
+            "p(90)": 598.3995,
+            "p(95)": 619.722025,
+            "avg": 379.2690401664665,
+            "min": 0
+        },
+        "http_req_duration{expected_response:true}": {
+            "min": 0.5039,
+            "med": 515.55645,
+            "max": 1036.2185,
+            "p(90)": 598.49577,
+            "p(95)": 619.829405,
+            "avg": 379.36742360853316
+        },
+        "http_req_duration": {
+            "avg": 379.3666174694854,
+            "min": 0,
+            "med": 515.55435,
+            "max": 1036.2185,
+            "p(90)": 598.49575,
+            "p(95)": 619.829375,
+            "thresholds": {
+                "p(95)<200": true
+            }
+        },
+        "http_reqs": {
+            "count": 941196,
+            "rate": 3901.7665844796034
+        },
+        "http_req_tls_handshaking": {
+            "avg": 0,
+            "min": 0,
+            "med": 0,
+            "max": 0,
+            "p(90)": 0,
+            "p(95)": 0
+        },
+        "checks": {
+            "passes": 1411791,
+            "fails": 4,
+            "value": 0.999997166727464
+        },
+        "http_req_blocked": {
+            "avg": 0.006539878941261983,
+            "min": 0,
+            "med": 0,
+            "max": 3.27,
+            "p(90)": 0,
+            "p(95)": 0
+        },
+        "data_sent": {
+            "count": 197478760,
+            "rate": 818656.2914764484
+        },
+        "iteration_duration": {
+            "p(95)": 1432.6559,
+            "avg": 959.567839565109,
+            "min": 1.5625,
+            "med": 1255.0976,
+            "max": 1972.4554,
+            "p(90)": 1394.9403
+        },
+        "iterations": {
+            "count": 470599,
+            "rate": 1950.8874377807776
+        },
+        "vus": {
+            "value": 732,
+            "min": 19,
+            "max": 2500
+        },
+        "http_req_sending": {
+            "med": 0,
+            "max": 4.5489,
+            "p(90)": 0,
+            "p(95)": 0,
+            "avg": 0.0016429202844040955,
+            "min": 0
+        },
+        "http_req_connecting": {
+            "p(95)": 0,
+            "avg": 0.005862103855095004,
+            "min": 0,
+            "med": 0,
+            "max": 3.1175,
+            "p(90)": 0
+        },
+        "vus_max": {
+            "value": 2500,
+            "min": 2500,
+            "max": 2500
+        },
+        "http_req_receiving": {
+            "avg": 0.09593438274280476,
+            "min": 0,
+            "med": 0,
+            "max": 9.7967,
+            "p(90)": 0.5246,
+            "p(95)": 0.536
+        },
+        "data_received": {
+            "count": 360878411,
+            "rate": 1496036.2401666564
+        }
+    },
+    "root_group": {
+        "id": "d41d8cd98f00b204e9800998ecf8427e",
+        "groups": {},
+        "checks": {
+                "get status is 200": {
+                    "path": "::get status is 200",
+                    "id": "46c14443ccfc46895452edbdd9a45435",
+                    "passes": 470597,
+                    "fails": 2,
+                    "name": "get status is 200"
+                },
+                "has description": {
+                    "name": "has description",
+                    "path": "::has description",
+                    "id": "0cbe5855f1d95ee0b2677a256a428781",
+                    "passes": 470597,
+                    "fails": 2
+                },
+                "post status is 201": {
+                    "name": "post status is 201",
+                    "path": "::post status is 201",
+                    "id": "ffa76d059a65caa5bd22680dd54d2f82",
+                    "passes": 470597,
+                    "fails": 0
+                }
+            },
+        "name": "",
+        "path": ""
+    }
+}

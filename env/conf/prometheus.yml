@@ -1,0 +1,12 @@
+global:
+  scrape_interval: 5s # Sűrű mintavétel a pontos méréshez
+
+scrape_configs:
+  - job_name: 'postgres'
+    static_configs:
+      - targets: ['postgres-exporter:9187']
+
+  - job_name: 'spring-boot-app'
+    metrics_path: '/actuator/prometheus'
+    static_configs:
+      - targets: [ 'host.docker.internal:8080' ]
